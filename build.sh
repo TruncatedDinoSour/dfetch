@@ -22,8 +22,6 @@ main() {
         strip $STRIPFLAGS --strip-all --remove-section=.note --remove-section=.gnu.version --remove-section=.comment --strip-debug --strip-unneeded dfetch
     fi
 
-    cd ..
-
     if [ "$1" = '-r' ]; then
         ./dfetch
     fi
