@@ -2,7 +2,7 @@
 
 set -xe
 
-GENERIC_FLAGS="$CFLAGS -std=c99 -Wall -Wextra -Wpedantic -Wshadow -Werror -pedantic -march=native -mtune=native -pipe -o ../dfetch main.c"
+GENERIC_FLAGS="$CFLAGS -std=c99 -Wall -Wextra -Wpedantic -Wshadow -Werror -pedantic -march=native -mtune=native -pipe -o dfetch src/main.c"
 
 main() {
     case "$1" in
@@ -15,13 +15,11 @@ main() {
 
     CC="${CC:-clang}"
 
-    cd src
-
     if [ "$DEBUG" ]; then
         $CC -g $GENERIC_FLAGS
     else
         $CC -flto -Ofast -ffunction-sections -fdata-sections -s $GENERIC_FLAGS
-        strip $STRIPFLAGS --strip-all --remove-section=.note --remove-section=.gnu.version --remove-section=.comment --strip-debug --strip-unneeded ../dfetch.elf
+        strip $STRIPFLAGS --strip-all --remove-section=.note --remove-section=.gnu.version --remove-section=.comment --strip-debug --strip-unneeded dfetch
     fi
 
     cd ..
