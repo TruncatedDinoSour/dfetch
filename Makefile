@@ -1,6 +1,6 @@
 all: dfetch
 
-dfetch:
+dfetch: src/main.c
 	./build.sh
 
 install: dfetch
