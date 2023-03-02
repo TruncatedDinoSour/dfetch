@@ -11,17 +11,18 @@
 #define MAX_DISTRO_LENGTH   64
 #define DISTRO_NAME_ATTR    "NAME="
 #define MAX_PACKAGE_CMD_LEN 49
-static const char package_managers[][MAX_PACKAGE_CMD_LEN] = {
-    "q qlist -I",
-    "dnf list installed",
-    "dpkg-query -f '${binary:Package}\n' -W",
-    "nix-store -q --requisites /run/current-system/sw",
-    "pacman -Qq",
-    "rpm -qa --last",
-    "xbps-query -l",
-    "bonsai list",
-    "apk info",
-    "pkg list-installed",
-};
-#define PKG_END " 2>/dev/null|wc -l"
+#define PKG_MANAGER(cmd)    cmd "\n"
+#define PACKAGE_MANAGERS_CMD \
+    "{\n" \
+    PKG_MANAGER("q qlist -I") \
+    PKG_MANAGER("dnf list installed") \
+    PKG_MANAGER("dpkg-query -f '${binary:Package}\n' -W") \
+    PKG_MANAGER("nix-store -q --requisites /run/current-system/sw") \
+    PKG_MANAGER("pacman -Qq") \
+    PKG_MANAGER("rpm -qa --last") \
+    PKG_MANAGER("xbps-query -l") \
+    PKG_MANAGER("bonsai list") \
+    PKG_MANAGER("apk info") \
+    PKG_MANAGER("pkg list-installed") \
+    "} 2>/dev/null|wc -l"
 #endif /* _CONFIG_H */
