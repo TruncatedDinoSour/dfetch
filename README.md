@@ -1,3 +1,4 @@
+# This repository has been migrated to the self-hosted ari-web Forgejo instance: <https://git.ari.lt/ari/dfetch>
 # dfetch
 
 > a dynamic suckless fetch framework written in pure c
